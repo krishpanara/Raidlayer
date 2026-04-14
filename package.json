@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "npx --yes opennextjs-cloudflare build && npx opennextjs-cloudflare deploy",
-    "preview": "npx --yes opennextjs-cloudflare build && npx opennextjs-cloudflare preview"
+    "deploy": "npm install --ignore-scripts @opennextjs/cloudflare@1.19.1 wrangler && opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "preview": "npm install --ignore-scripts @opennextjs/cloudflare@1.19.1 wrangler && opennextjs-cloudflare build && opennextjs-cloudflare preview"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
