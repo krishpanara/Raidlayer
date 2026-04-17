@@ -10,7 +10,6 @@
   "deploy": "npx opennextjs-cloudflare deploy",
   "preview": "npx opennextjs-cloudflare preview"
  
-
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
