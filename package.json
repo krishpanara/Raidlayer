@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "preview": "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && opennextjs-cloudflare build && opennextjs-cloudflare preview"
+     "dev": "next dev",
+  "build": "next build",
+  "deploy": "npx opennextjs-cloudflare deploy",
+  "preview": "npx opennextjs-cloudflare preview"
+ 
+
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
