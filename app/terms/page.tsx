@@ -1,14 +1,20 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import PageHero from '@/components/PageHero'
+import { buildMetadata, breadcrumbSchema } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Terms of Service',
-  description: 'Terms of Service for Raidlayer Webhost Private Limited.',
-}
+export const metadata: Metadata = buildMetadata({
+  title: 'Terms of Service — Raidlayer Webhost Private Limited',
+  description:
+    'Terms of Service for Raidlayer Webhost Private Limited — governing the use of our website, cloud hosting services, and technology solutions.',
+  path: '/terms',
+})
 
 export default function TermsPage() {
   return (
     <>
+      <Script id="schema-breadcrumb-terms" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Terms of Service', url: '/terms' }])) }} />
+
       <PageHero
         badge="Legal"
         title="Terms of Service"
@@ -23,7 +29,7 @@ export default function TermsPage() {
             </div>
             <div>
               <h2 className="text-xl font-bold text-slate-900 mb-3">2. Services</h2>
-              <p>Raidlayer provides web hosting, cloud infrastructure, offshore development team services, and related technology services. The specific terms of any service engagement will be governed by a separate service agreement between Raidlayer and the client.</p>
+              <p>Raidlayer provides cloud hosting, infrastructure management, offshore development team services, and related technology services. The specific terms of any service engagement will be governed by a separate service agreement between Raidlayer and the client.</p>
             </div>
             <div>
               <h2 className="text-xl font-bold text-slate-900 mb-3">3. Use of Website</h2>

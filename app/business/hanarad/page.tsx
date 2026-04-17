@@ -1,16 +1,20 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import Script from 'next/script'
 import { Zap, Layers, GitBranch, Rocket, ArrowRight, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import PageHero from '@/components/PageHero'
 import SectionHeader from '@/components/SectionHeader'
+import { buildMetadata, serviceSchema, breadcrumbSchema } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Hanarad — Rapid Application Development Platform',
-  description: 'Internal RAD platform for accelerated application development, scalable architecture, and automation-driven workflows.',
-}
+export const metadata: Metadata = buildMetadata({
+  title: 'Hanarad — Rapid Application Development Platform for Enterprises',
+  description:
+    'Hanarad is Raidlayer\'s internal RAD platform for accelerated enterprise application development — scalable architecture, automation workflows, and faster time-to-market.',
+  path: '/business/hanarad',
+})
 
 const capabilities = [
   { icon: Zap, title: 'Accelerated Development', desc: 'Pre-built architecture patterns, reusable modules, and standardized workflows that compress development timelines without sacrificing quality.' },
@@ -29,9 +33,12 @@ const useCases = [
 export default function HanaradPage() {
   return (
     <>
+      <Script id="schema-hanarad-service" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema('Rapid Application Development Platform', "Hanarad is Raidlayer's internal RAD platform for accelerated enterprise application development with scalable architecture and automation workflows.", '/business/hanarad')) }} />
+      <Script id="schema-breadcrumb-hanarad" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Business Units', url: '/business/hanarad' }, { name: 'Hanarad RAD Platform', url: '/business/hanarad' }])) }} />
+
       <PageHero
         badge="Hanarad — RAD Platform"
-        title="Faster Product Delivery Through Systematic Development"
+        title="Rapid Application Development Platform for Faster Enterprise Delivery"
         subtitle="Hanarad is our internal rapid application development platform — a collection of frameworks, tools, and workflows that accelerate how we build and deploy enterprise applications."
       >
         <div className="flex flex-wrap justify-center gap-4">
@@ -45,11 +52,11 @@ export default function HanaradPage() {
       </PageHero>
 
       {/* Platform Overview */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" aria-label="Platform Overview">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">What is Hanarad?</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">What is the Hanarad RAD Platform?</h2>
               <p className="text-slate-600 leading-relaxed mb-4">
                 Hanarad is not a no-code tool or a visual builder. It is a systematic approach to application development — combining opinionated architecture frameworks, reusable component libraries, and automated deployment pipelines to dramatically reduce time-to-production.
               </p>
@@ -70,9 +77,11 @@ export default function HanaradPage() {
             <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
               <Image
                 src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-                alt="Application development dashboard"
+                alt="Hanarad rapid application development platform — enterprise software development dashboard and analytics"
                 fill
                 className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>
@@ -80,19 +89,19 @@ export default function HanaradPage() {
       </section>
 
       {/* Key Capabilities */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-slate-50" aria-label="Platform Capabilities">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Platform Capabilities"
-            title="Built for speed without compromising structure"
+            title="Rapid application development built for speed without compromising structure"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {capabilities.map((c) => (
               <Card key={c.title} className="p-6 hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 bg-violet-50 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-10 h-10 bg-violet-50 rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
                   <c.icon className="w-5 h-5 text-violet-600" />
                 </div>
-                <h4 className="font-semibold text-slate-900 text-lg mb-2">{c.title}</h4>
+                <h3 className="font-semibold text-slate-900 text-lg mb-2">{c.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{c.desc}</p>
               </Card>
             ))}
@@ -101,11 +110,11 @@ export default function HanaradPage() {
       </section>
 
       {/* Development Approach */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" aria-label="Development Approach">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Development Approach"
-            title="How we build with Hanarad"
+            title="How we build with the Hanarad RAD platform"
           />
           <div className="max-w-3xl mx-auto">
             {[
@@ -116,13 +125,13 @@ export default function HanaradPage() {
             ].map((phase, i) => (
               <div key={phase.step} className="flex gap-6 mb-8">
                 <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">
+                  <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0" aria-hidden="true">
                     {phase.step}
                   </div>
-                  {i < 3 && <div className="w-px flex-1 bg-blue-200 mt-2" />}
+                  {i < 3 && <div className="w-px flex-1 bg-blue-200 mt-2" aria-hidden="true" />}
                 </div>
                 <div className="pb-8">
-                  <h4 className="font-semibold text-slate-900 mb-2">{phase.title}</h4>
+                  <h3 className="font-semibold text-slate-900 mb-2">{phase.title}</h3>
                   <p className="text-slate-600 text-sm leading-relaxed">{phase.desc}</p>
                 </div>
               </div>
@@ -132,14 +141,14 @@ export default function HanaradPage() {
       </section>
 
       {/* Use Cases */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-slate-50" aria-label="Use Cases">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader badge="Use Cases" title="Where Hanarad delivers the most value" />
+          <SectionHeader badge="Use Cases" title="Where the Hanarad RAD platform delivers the most value" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {useCases.map((u) => (
               <div key={u.title} className="border border-slate-200 bg-white rounded-xl p-6 hover:border-blue-200 hover:shadow-sm transition-all">
-                <CheckCircle className="w-5 h-5 text-blue-600 mb-3" />
-                <h4 className="font-semibold text-slate-900 mb-2">{u.title}</h4>
+                <CheckCircle className="w-5 h-5 text-blue-600 mb-3" aria-hidden="true" />
+                <h3 className="font-semibold text-slate-900 mb-2">{u.title}</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">{u.desc}</p>
               </div>
             ))}
@@ -147,11 +156,23 @@ export default function HanaradPage() {
         </div>
       </section>
 
+      {/* Internal Links */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-lg font-semibold text-slate-900 mb-4">Related Services</h2>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild variant="outline" size="sm"><Link href="/services/rapid-development">Rapid Application Development</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link href="/services/offshore-teams">Offshore Development Teams</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link href="/technology">Technology Stack</Link></Button>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="py-16 bg-blue-600">
+      <section className="py-16 bg-blue-600" aria-label="Contact CTA">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Need to build faster without cutting corners?</h2>
-          <p className="text-blue-100 mb-8 max-w-xl mx-auto">Tell us about your application requirements and we'll show you how Hanarad can accelerate your delivery timeline.</p>
+          <p className="text-blue-100 mb-8 max-w-xl mx-auto">Tell us about your application requirements and we'll show you how the Hanarad RAD platform can accelerate your delivery timeline.</p>
           <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
             <Link href="/contact">Discuss Your Project</Link>
           </Button>

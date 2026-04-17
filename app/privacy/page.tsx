@@ -1,14 +1,20 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import PageHero from '@/components/PageHero'
+import { buildMetadata, breadcrumbSchema } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Privacy Policy for Raidlayer Webhost Private Limited.',
-}
+export const metadata: Metadata = buildMetadata({
+  title: 'Privacy Policy — Raidlayer Webhost Private Limited',
+  description:
+    'Privacy Policy for Raidlayer Webhost Private Limited — how we collect, use, and protect your personal information in compliance with data protection regulations.',
+  path: '/privacy',
+})
 
 export default function PrivacyPage() {
   return (
     <>
+      <Script id="schema-breadcrumb-privacy" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Privacy Policy', url: '/privacy' }])) }} />
+
       <PageHero
         badge="Legal"
         title="Privacy Policy"

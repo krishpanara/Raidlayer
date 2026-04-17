@@ -1,16 +1,39 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import Script from 'next/script'
 import { Target, Eye, ArrowRight, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import PageHero from '@/components/PageHero'
 import SectionHeader from '@/components/SectionHeader'
+import { buildMetadata, breadcrumbSchema, SITE_NAME, SITE_URL } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Learn about Raidlayer Webhost Private Limited — our mission, vision, and the leadership driving enterprise technology solutions.',
+export const metadata: Metadata = buildMetadata({
+  title: 'About Raidlayer Webhost — Vision, Mission & Leadership Team',
+  description:
+    'Learn about Raidlayer Webhost Private Limited — India-based enterprise technology company with three verticals: cloud hosting, offshore development teams, and RAD platform.',
+  path: '/about',
+})
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: `About ${SITE_NAME}`,
+  url: `${SITE_URL}/about`,
+  description:
+    'Raidlayer Webhost Private Limited is an India-based enterprise technology company operating cloud hosting, offshore development teams, and rapid application development.',
+  mainEntity: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+    foundingLocation: { '@type': 'Country', name: 'India' },
+    employee: [
+      { '@type': 'Person', name: 'Shwet Dadhaniya', jobTitle: 'Director & CEO' },
+      { '@type': 'Person', name: 'Jitendra Dadhaniya', jobTitle: 'Chairman' },
+    ],
+  },
 }
 
 const values = [
@@ -23,41 +46,49 @@ const values = [
 export default function AboutPage() {
   return (
     <>
+      <Script id="schema-about" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
+      <Script id="schema-breadcrumb-about" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'About', url: '/about' }])) }} />
+
       <PageHero
         badge="About Raidlayer"
         title="A Technology Company Built for Enterprise Scale"
-        subtitle="Raidlayer Webhost Private Limited is an India-based enterprise technology company operating three specialized verticals — infrastructure, offshore development, and rapid application development."
+        subtitle="Raidlayer Webhost Private Limited is an India-based enterprise technology company operating three specialized verticals — cloud hosting, offshore development, and rapid application development."
       />
 
       {/* Company Overview */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" aria-label="Company Overview">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6">Who We Are</h2>
               <div className="space-y-4 text-slate-600 leading-relaxed">
                 <p>
-                  Raidlayer Webhost Private Limited is a registered Indian technology company that provides enterprise-grade infrastructure, offshore development team solutions, and rapid application development capabilities to businesses across India and internationally.
+                  Raidlayer Webhost Private Limited is a registered Indian technology company that provides enterprise-grade cloud hosting infrastructure, offshore development team solutions, and rapid application development capabilities to businesses across India and internationally.
                 </p>
                 <p>
-                  We operate through three distinct but complementary business units: <strong className="text-slate-800">Raidlayer</strong> for hosting and cloud infrastructure, <strong className="text-slate-800">Work24</strong> for offshore development teams and technical leadership, and <strong className="text-slate-800">Hanarad</strong> for accelerated application development.
+                  We operate through three distinct but complementary business units: <strong className="text-slate-800">Raidlayer</strong> for cloud hosting and infrastructure, <strong className="text-slate-800">Work24</strong> for offshore development teams and technical leadership, and <strong className="text-slate-800">Hanarad</strong> for accelerated application development.
                 </p>
                 <p>
                   Our integrated model allows clients to access infrastructure, talent, and platform capabilities from a single, accountable partner — reducing vendor fragmentation and operational overhead.
                 </p>
               </div>
-              <div className="mt-8">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <Button asChild>
                   <Link href="/contact">Start a Conversation <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/services">View Our Services</Link>
                 </Button>
               </div>
             </div>
             <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
               <Image
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
-                alt="Modern office environment"
+                alt="Raidlayer modern office environment — enterprise technology company in India"
                 fill
                 className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>
@@ -65,25 +96,26 @@ export default function AboutPage() {
       </section>
 
       {/* Vision & Mission */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-slate-50" aria-label="Vision and Mission">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader badge="Our Direction" title="Vision & Mission" centered />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="p-8">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6" aria-hidden="true">
                 <Eye className="w-6 h-6 text-blue-600" />
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Vision</h3>
               <p className="text-slate-600 leading-relaxed">
-                To be the most trusted integrated technology partner for growing businesses — providing the infrastructure, talent, and platforms they need to scale with confidence, without the complexity of managing multiple vendors.
+                To be the most trusted integrated technology partner for growing businesses — providing the cloud hosting infrastructure, offshore talent, and platforms they need to scale with confidence, without the complexity of managing multiple vendors.
               </p>
             </Card>
             <Card className="p-8">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6" aria-hidden="true">
                 <Target className="w-6 h-6 text-blue-600" />
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Mission</h3>
               <p className="text-slate-600 leading-relaxed">
-                To deliver enterprise-grade technology solutions — from reliable hosting infrastructure to skilled offshore development teams — with the operational discipline, transparency, and long-term commitment that serious businesses require.
+                To deliver enterprise-grade technology solutions — from reliable cloud hosting infrastructure to skilled offshore development teams — with the operational discipline, transparency, and long-term commitment that serious businesses require.
               </p>
             </Card>
           </div>
@@ -91,7 +123,7 @@ export default function AboutPage() {
       </section>
 
       {/* Business Philosophy */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" aria-label="Business Philosophy">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Our Philosophy"
@@ -101,8 +133,8 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((v) => (
               <div key={v.title} className="border border-slate-200 rounded-xl p-6 hover:border-blue-200 hover:shadow-sm transition-all">
-                <CheckCircle className="w-6 h-6 text-blue-600 mb-4" />
-                <h4 className="font-semibold text-slate-900 mb-2">{v.title}</h4>
+                <CheckCircle className="w-6 h-6 text-blue-600 mb-4" aria-hidden="true" />
+                <h3 className="font-semibold text-slate-900 mb-2">{v.title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{v.desc}</p>
               </div>
             ))}
@@ -111,11 +143,11 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-slate-50" aria-label="Leadership Team">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Leadership"
-            title="The people behind Raidlayer"
+            title="The people behind Raidlayer Webhost"
             subtitle="Our leadership brings together deep domain expertise in technology, operations, and business strategy."
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-3xl mx-auto">
@@ -123,7 +155,7 @@ export default function AboutPage() {
               {
                 name: 'Shwet Dadhaniya',
                 role: 'Director & CEO',
-                bio: 'Shwet leads the strategic direction and operations of Raidlayer Webhost Private Limited. With a focus on building scalable technology businesses, he oversees all three business verticals and drives the company\'s growth across infrastructure, offshore development, and platform services.',
+                bio: "Shwet leads the strategic direction and operations of Raidlayer Webhost Private Limited. With a focus on building scalable technology businesses, he oversees all three business verticals and drives the company's growth across cloud hosting, offshore development, and platform services.",
               },
               {
                 name: 'Jitendra Dadhaniya',
@@ -132,7 +164,7 @@ export default function AboutPage() {
               },
             ].map((person) => (
               <Card key={person.name} className="overflow-hidden">
-                <div className="h-48 bg-gradient-to-br from-blue-100 to-slate-200 flex items-center justify-center">
+                <div className="h-48 bg-gradient-to-br from-blue-100 to-slate-200 flex items-center justify-center" aria-hidden="true">
                   <div className="w-24 h-24 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 text-3xl font-bold">
                     {person.name.charAt(0)}
                   </div>
@@ -145,6 +177,19 @@ export default function AboutPage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Internal Links */}
+      <section className="py-16 bg-white" aria-label="Explore More">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Explore what we do</h2>
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
+            <Button asChild variant="outline"><Link href="/business/raidlayer">Raidlayer Infrastructure</Link></Button>
+            <Button asChild variant="outline"><Link href="/business/work24">Work24 Offshore Teams</Link></Button>
+            <Button asChild variant="outline"><Link href="/business/hanarad">Hanarad RAD Platform</Link></Button>
+            <Button asChild variant="outline"><Link href="/technology">Technology Stack</Link></Button>
           </div>
         </div>
       </section>
