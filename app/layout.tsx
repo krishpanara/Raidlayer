@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     default: 'Raidlayer Webhost — Enterprise Hosting, Offshore Teams & RAD Platform',
     template: `%s | ${SITE_NAME}`,
   },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.svg',
+  },
   description:
     'Raidlayer Webhost Private Limited delivers enterprise cloud hosting, dedicated offshore development teams from India, and rapid application development — powering businesses at scale.',
   keywords: [
