@@ -6,7 +6,7 @@
     "start": "next start",
     "lint": "next lint",
      "dev": "next dev",
-  "build": "next build",
+  "build": "opennextjs-cloudflare build",
   "deploy": "npx opennextjs-cloudflare deploy",
   "preview": "npx opennextjs-cloudflare preview"
  
