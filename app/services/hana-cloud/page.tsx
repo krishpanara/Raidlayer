@@ -274,6 +274,7 @@ export default function HanaCloudPage() {
           <p className="text-center text-xs text-slate-400 mt-6">
             * Dedicated Cloud VPS Server Plans. Prices in Philippine Peso (PHP). Contact us for custom configurations.
           </p>
+          
 
         </div>
       </section>
