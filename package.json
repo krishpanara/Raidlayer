@@ -6,7 +6,7 @@
     "start": "next start",
     "lint": "next lint",
      "dev": "next dev",
-  "build": "next build",
+  "build": "if [ -n \"$OPENNEXT_BUILDING\" ]; then next build; else OPENNEXT_BUILDING=1 npx opennextjs-cloudflare build; fi",
   "deploy": "npx opennextjs-cloudflare deploy",
   "preview": "npx opennextjs-cloudflare preview"
  
