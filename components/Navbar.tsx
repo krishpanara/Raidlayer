@@ -19,8 +19,7 @@ const navLinks = [
   {
     label: 'Services',
     children: [
-      { label: 'Cloud & Hosting Solutions', href: '/services/cloud-hosting' },
-      { label: 'HANA Cloud — Managed Infrastructure', href: '/services/hana-cloud' },
+      { label: 'DevOps & Infrastructure Support', href: '/services/devops-infrastructure' },
       { label: 'Email & Communication Infrastructure', href: '/services/email-infrastructure' },
       { label: 'Offshore Development Teams', href: '/services/offshore-teams' },
       { label: 'CTO & Technical Leadership', href: '/services/cto-leadership' },
@@ -29,7 +28,14 @@ const navLinks = [
   },
   { label: 'Technology', href: '/technology' },
   { label: 'Industries', href: '/industries' },
-  { label: 'Infrastructure', href: '/infrastructure' },
+  {
+    label: 'Infrastructure',
+    children: [
+      { label: 'Infrastructure', href: '/infrastructure' },
+      { label: 'Cloud & Hosting Solutions', href: '/services/cloud-hosting' },
+      { label: 'HANA Cloud — Managed Infrastructure', href: '/services/hana-cloud' },
+    ],
+  },
   { label: 'Careers', href: '/careers' },
 ]
 
